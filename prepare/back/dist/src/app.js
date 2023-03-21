@@ -15,7 +15,9 @@ dotenv_1.default.config();
 const cuoponRouter_1 = __importDefault(require("./routes/cuoponRouter"));
 console.log("version 1");
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: ["http://localhost:3000", "http://43.201.113.255"],
+}));
 if (process.env.NODE_ENV === "production") {
     app.use((0, morgan_1.default)("combined"));
     app.use((0, hpp_1.default)());
@@ -29,7 +31,7 @@ mongoose_1.default
     .then(() => console.log(" 몽고디비 connect!"))
     .catch((err) => console.log(err));
 app.use(express_1.default.static(path_1.default.join(__dirname, "build")));
-app.use("/upload", express_1.default.static(path_1.default.join(__dirname, "../../uploads")));
+app.use("/", express_1.default.static(path_1.default.join(__dirname, "../../uploads")));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.get("/welcome", (req, res) => {

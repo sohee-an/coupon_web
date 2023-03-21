@@ -49,7 +49,7 @@ const Card: FC<Coupon> = ({ title, couponNumber, image, lastDay }) => {
     <Container>
       <TopWrapper>
         <Title>{title}</Title>
-        <Image src={`upload/${image?.[0]}`}></Image>
+        <Image src={`/${image?.[0]}`}></Image>
         <div>쿠폰번호:{couponNumber}</div>
         <div>{lastDay}</div>
       </TopWrapper>

@@ -14,7 +14,11 @@ import cuoponRouter from "./routes/cuoponRouter";
 console.log("version 1");
 
 const app: Application = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "http://43.201.113.255"],
+  })
+);
 
 if (process.env.NODE_ENV === "production") {
   app.use(morgan("combined"));
@@ -30,7 +34,7 @@ mongoose
   .catch((err: Error) => console.log(err));
 
 app.use(express.static(path.join(__dirname, "build")));
-app.use("/upload", express.static(path.join(__dirname, "../../uploads")));
+app.use("/", express.static(path.join(__dirname, "../../uploads")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
