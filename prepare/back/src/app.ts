@@ -17,7 +17,7 @@ app.use(
     origin: [
       "http://54.180.99.154",
       "http://localhost:3000",
-      "http://43.201.113.255",
+      "http://localhost",
     ],
   })
 );
@@ -47,11 +47,11 @@ app.get("/welcome", (req: Request, res: Response) => {
 app.use("/api/cuopon", cuoponRouter);
 
 app.get("/*", (req, res) => {
-  // res.set({
-  //   "Cache-Control": "no-cache, no-store, must-revalidate",
-  //   Pragma: "no-cache",
-  //   Date: Date.now(),
-  // });
+  res.set({
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    Pragma: "no-cache",
+    Date: Date.now(),
+  });
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
