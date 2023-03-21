@@ -35,8 +35,8 @@ mongoose
   .then(() => console.log(" 몽고디비 connect!"))
   .catch((err: Error) => console.log(err));
 
-//app.use(express.static(path.join(__dirname, "build")));
-app.use("/", express.static(path.join(__dirname, "../uploads")));
+app.use(express.static(path.join(__dirname, "build")));
+app.use("/upload", express.static(path.join(__dirname, "../uploads")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -46,14 +46,14 @@ app.get("/welcome", (req: Request, res: Response) => {
 
 app.use("/api/cuopon", cuoponRouter);
 
-// app.get("/*", (req, res) => {
-//   res.set({
-//     "Cache-Control": "no-cache, no-store, must-revalidate",
-//     Pragma: "no-cache",
-//     Date: Date.now(),
-//   });
-//   res.sendFile(path.join(__dirname, "build", "index.html"));
-// });
+app.get("/*", (req, res) => {
+  res.set({
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    Pragma: "no-cache",
+    Date: Date.now(),
+  });
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 app.listen(process.env.PORT || 8070, () => {
   console.log(`

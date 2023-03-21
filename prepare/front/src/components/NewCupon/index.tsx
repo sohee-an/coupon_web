@@ -132,7 +132,11 @@ const NewCupon = () => {
           <div>
             {imagePaths.map((v, i) => (
               <div key={v} style={{ display: "inline-block" }}>
-                <img src={`${imgURL}${v}`} style={{ width: "200px" }} alt={v} />
+                <img
+                  src={`upload/${imgURL}${v}`}
+                  style={{ width: "200px" }}
+                  alt={v}
+                />
               </div>
             ))}
           </div>
