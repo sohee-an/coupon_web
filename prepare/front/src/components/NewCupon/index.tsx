@@ -59,10 +59,7 @@ const NewCupon = () => {
 
       const postInput = async () => {
         try {
-          const res = await axios.post(
-            `${backURL}/cuopon/images`,
-            imageFormData
-          );
+          const res = await axios.post(`cuopon/images`, imageFormData);
           setImagePaths(res.data);
         } catch (err) {
           console.dir(err);

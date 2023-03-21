@@ -11,15 +11,14 @@ dotenv.config();
 
 import cuoponRouter from "./routes/cuoponRouter";
 
-// declare global {
-//   interface Window {
-//     Kakao: any;
-//   }
-// }
 const app: Application = express();
 app.use(
   cors({
-    origin: ["http://54.180.99.154"],
+    origin: [
+      "http://54.180.99.154",
+      "http://localhost:3000",
+      "http://43.201.113.255",
+    ],
   })
 );
 
@@ -36,7 +35,7 @@ mongoose
   .then(() => console.log(" 몽고디비 connect!"))
   .catch((err: Error) => console.log(err));
 
-app.use(express.static(path.join(__dirname, "build")));
+//app.use(express.static(path.join(__dirname, "build")));
 app.use("/", express.static(path.join(__dirname, "../uploads")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -47,14 +46,14 @@ app.get("/welcome", (req: Request, res: Response) => {
 
 app.use("/api/cuopon", cuoponRouter);
 
-app.get("/*", (req, res) => {
-  res.set({
-    "Cache-Control": "no-cache, no-store, must-revalidate",
-    Pragma: "no-cache",
-    Date: Date.now(),
-  });
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+// app.get("/*", (req, res) => {
+//   res.set({
+//     "Cache-Control": "no-cache, no-store, must-revalidate",
+//     Pragma: "no-cache",
+//     Date: Date.now(),
+//   });
+//   res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
 
 app.listen(process.env.PORT || 8070, () => {
   console.log(`
