@@ -13,6 +13,7 @@ const hpp_1 = __importDefault(require("hpp"));
 const helmet_1 = __importDefault(require("helmet"));
 dotenv_1.default.config();
 const cuoponRouter_1 = __importDefault(require("./routes/cuoponRouter"));
+console.log("version 1");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 if (process.env.NODE_ENV === "production") {
