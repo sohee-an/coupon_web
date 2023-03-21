@@ -11,19 +11,30 @@ dotenv.config();
 
 import cuoponRouter from "./routes/cuoponRouter";
 
-declare global {
-  interface Window {
-    Kakao: any;
-  }
-}
+// declare global {
+//   interface Window {
+//     Kakao: any;
+//   }
+// }
 const app: Application = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://54.180.99.154"],
+  })
+);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(morgan("combined"));
+  app.use(hpp());
+  app.use(helmet());
+} else {
+  app.use(morgan("dev"));
+}
 
 mongoose
   .connect(process.env.MONGODB_URL as string)
   .then(() => console.log(" 몽고디비 connect!"))
   .catch((err: Error) => console.log(err));
-app.use(morgan("dev"));
 
 app.use(express.static(path.join(__dirname, "build")));
 app.use("/", express.static(path.join(__dirname, "../uploads")));
@@ -35,9 +46,6 @@ app.get("/welcome", (req: Request, res: Response) => {
 });
 
 app.use("/api/cuopon", cuoponRouter);
-app.get("*", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
 
 app.listen(process.env.PORT || 8070, () => {
   console.log(`
