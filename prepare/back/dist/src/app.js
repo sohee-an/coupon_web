@@ -18,7 +18,7 @@ app.use((0, cors_1.default)({
     origin: [
         "http://54.180.99.154",
         "http://localhost:3000",
-        "http://43.201.113.255",
+        "http://localhost",
     ],
 }));
 if (process.env.NODE_ENV === "production") {
@@ -42,11 +42,11 @@ app.get("/welcome", (req, res) => {
 });
 app.use("/api/cuopon", cuoponRouter_1.default);
 app.get("/*", (req, res) => {
-    // res.set({
-    //   "Cache-Control": "no-cache, no-store, must-revalidate",
-    //   Pragma: "no-cache",
-    //   Date: Date.now(),
-    // });
+    res.set({
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        Pragma: "no-cache",
+        Date: Date.now(),
+    });
     res.sendFile(path_1.default.join(__dirname, "build", "index.html"));
 });
 app.listen(process.env.PORT || 8070, () => {
