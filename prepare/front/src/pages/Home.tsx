@@ -18,7 +18,7 @@ const Home = () => {
     /**Coupon 정보 가져오기 */
     const getCoupon = async () => {
       try {
-        const res = await axios.get(`cuopon`);
+        const res = await axios.get(`api/cuopon`);
 
         setCoupons(res.data);
       } catch (err) {

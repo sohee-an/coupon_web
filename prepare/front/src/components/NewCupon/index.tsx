@@ -10,7 +10,8 @@ interface Inputs {
 }
 
 const NewCupon = () => {
-  const backURL = "http://localhost:8070/api";
+  // const backURL = "http://localhost:8070/api";
+
   const [inputs, setInputs] = useState<Inputs>({
     title: "",
     couponNumber: "",
@@ -59,7 +60,7 @@ const NewCupon = () => {
 
       const postInput = async () => {
         try {
-          const res = await axios.post(`cuopon/images`, imageFormData);
+          const res = await axios.post(`api/cuopon/images`, imageFormData);
           setImagePaths(res.data);
         } catch (err) {
           console.dir(err);
@@ -86,7 +87,7 @@ const NewCupon = () => {
         formData.append("lastDay", lastDay);
         formData.append("couponNumber", couponNumber);
         try {
-          const res = await axios.post(`${backURL}/cuopon`, formData);
+          const res = await axios.post(`api/cuopon`, formData);
           console.log("response", res);
           setTitle("");
           setCouponNumber("");
