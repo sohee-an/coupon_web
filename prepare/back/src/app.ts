@@ -47,6 +47,15 @@ app.get("/welcome", (req: Request, res: Response) => {
 
 app.use("/api/cuopon", cuoponRouter);
 
+app.get("/*", (req, res) => {
+  res.set({
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    Pragma: "no-cache",
+    Date: Date.now(),
+  });
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 app.listen(process.env.PORT || 8070, () => {
   console.log(`
   ################################################
