@@ -12,15 +12,7 @@ dotenv.config();
 import cuoponRouter from "./routes/cuoponRouter";
 
 const app: Application = express();
-app.use(
-  cors({
-    origin: [
-      "http://54.180.99.154",
-      "http://localhost:3000",
-      "http://localhost",
-    ],
-  })
-);
+app.use(cors());
 
 if (process.env.NODE_ENV === "production") {
   app.use(morgan("combined"));

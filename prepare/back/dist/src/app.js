@@ -14,13 +14,7 @@ const helmet_1 = __importDefault(require("helmet"));
 dotenv_1.default.config();
 const cuoponRouter_1 = __importDefault(require("./routes/cuoponRouter"));
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)({
-    origin: [
-        "http://54.180.99.154",
-        "http://localhost:3000",
-        "http://localhost",
-    ],
-}));
+app.use((0, cors_1.default)());
 if (process.env.NODE_ENV === "production") {
     app.use((0, morgan_1.default)("combined"));
     app.use((0, hpp_1.default)());
