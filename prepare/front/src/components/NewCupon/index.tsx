@@ -59,7 +59,7 @@ const NewCupon = () => {
       const postInput = async () => {
         try {
           const res = await axios.post(
-            `${process.env.REACT_APP_DB_HOST}api/cuopon/images`,
+            `${backUrl}api/cuopon/images`,
             imageFormData
           );
           setImagePaths(res.data);
@@ -134,7 +134,7 @@ const NewCupon = () => {
             {imagePaths.map((v, i) => (
               <div key={v} style={{ display: "inline-block" }}>
                 <img
-                  src={`${process.env.REACT_APP_DB_HOST}${v}`}
+                  src={`${backUrl}${v}`}
                   style={{ width: "200px" }}
                   alt={v}
                 />
