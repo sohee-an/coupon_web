@@ -16,13 +16,14 @@ const cuoponRouter_1 = __importDefault(require("./routes/cuoponRouter"));
 console.log("version 1");
 const app = (0, express_1.default)();
 const setCrossOriginOpenerPolicyHeader = (req, res, next) => {
-    res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+    //res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+    res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
     next();
 };
 // Cross-Origin-Opener-Policy 헤더를 설정하는 미들웨어 함수를 등록합니다.
 app.use(setCrossOriginOpenerPolicyHeader);
 if (process.env.NODE_ENV === "production") {
-    app.enable("trust proxy");
+    //app.enable("trust proxy");
     app.use((0, morgan_1.default)("combined"));
     app.use((0, hpp_1.default)());
     app.use((0, helmet_1.default)({ contentSecurityPolicy: false }));
@@ -45,7 +46,7 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.get("/welcome", (req, res) => {
     res.send("welcome");
 });
-app.use("/api/cuopon", cuoponRouter_1.default);
+app.use("/api/cuopon", setCrossOriginOpenerPolicyHeader, cuoponRouter_1.default);
 app.get("/*", (req, res) => {
     res.set({
         "Cache-Control": "no-cache, no-store, must-revalidate",

@@ -20,7 +20,8 @@ const setCrossOriginOpenerPolicyHeader = (
   res: Response,
   next: Function
 ) => {
-  res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+  //res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
   next();
 };
 
