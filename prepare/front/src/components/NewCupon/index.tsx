@@ -45,8 +45,6 @@ const NewCupon = () => {
     [setTitle, setCouponNumber, setLastDay]
   );
 
-  console.log("inputs", title, lastDay, couponNumber);
-
   /**이미지만 먼저 저장 */
   const onChangeImages = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +52,6 @@ const NewCupon = () => {
       [].forEach.call(e.target.files, (f) => {
         imageFormData.append("image", f);
       });
-      console.log(imageFormData);
 
       const postInput = async () => {
         try {
@@ -89,7 +86,7 @@ const NewCupon = () => {
         formData.append("couponNumber", couponNumber);
         try {
           const res = await axios.post(`${backUrl}api/cuopon`, formData);
-          console.log("response", res);
+
           setTitle("");
           setCouponNumber("");
           setLastDay("");

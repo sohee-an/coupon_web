@@ -29,7 +29,6 @@ const setCrossOriginOpenerPolicyHeader = (
 app.use(setCrossOriginOpenerPolicyHeader);
 
 if (process.env.NODE_ENV === "production") {
-  //app.enable("trust proxy");
   app.use(morgan("combined"));
   app.use(hpp());
   app.use(helmet({ contentSecurityPolicy: false }));
