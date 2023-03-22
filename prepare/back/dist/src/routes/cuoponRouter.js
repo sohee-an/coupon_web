@@ -46,7 +46,7 @@ cuoponRouter.post("/images", upload.array("image"), (req, res, next) => {
     res.json(imageFiles === null || imageFiles === void 0 ? void 0 : imageFiles.map((v) => v.filename));
 });
 /**모든 inputs을 등록 */
-cuoponRouter.post("/", upload.none(), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+cuoponRouter.post("/", upload.none(), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const newCoupon = new Coupon({
             title: req.body.title,

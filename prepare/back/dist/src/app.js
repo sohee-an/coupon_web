@@ -10,16 +10,15 @@ const path_1 = __importDefault(require("path"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
 const hpp_1 = __importDefault(require("hpp"));
-const helmet_1 = __importDefault(require("helmet"));
 dotenv_1.default.config();
 const cuoponRouter_1 = __importDefault(require("./routes/cuoponRouter"));
 console.log("version 1");
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({ origin: ["http://localhost:8070/"] }));
 if (process.env.NODE_ENV === "production") {
     app.use((0, morgan_1.default)("combined"));
     app.use((0, hpp_1.default)());
-    app.use((0, helmet_1.default)());
+    // app.use(helmet());
 }
 else {
     app.use((0, morgan_1.default)("dev"));
