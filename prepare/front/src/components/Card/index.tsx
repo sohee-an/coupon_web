@@ -5,45 +5,45 @@ import { backUrl } from "../../config";
 import { Coupon } from "../../types/couponType";
 
 const Card: FC<Coupon> = ({ title, couponNumber, image, lastDay }) => {
-  // const kakaoButton = () => {
-  //   if (window.Kakao) {
-  //     const kakao = window.Kakao;
+  const kakaoButton = () => {
+    if (window.Kakao) {
+      const kakao = window.Kakao;
 
-  //     if (!kakao.isInitialized()) {
-  //       kakao.init(process.env.KAKAO_JS_KEY as string);
-  //     }
+      if (!kakao.isInitialized()) {
+        kakao.init(process.env.KAKAO_JS_KEY as string);
+      }
 
-  //     kakao.Share.sendDefault({
-  //       objectType: "feed",
-  //       content: {
-  //         title: title,
-  //         description: "#쿠폰  #카페 #분위기 #마트 ",
-  //         imageUrl: image?.[0],
-  //         link: {
-  //           mobileWebUrl: "https://developers.kakao.com",
-  //           webUrl: "https://developers.kakao.com",
-  //         },
-  //       },
+      kakao.Share.sendDefault({
+        objectType: "feed",
+        content: {
+          title: title,
+          description: "#쿠폰  #카페 #분위기 #마트 ",
+          imageUrl: image?.[0],
+          link: {
+            mobileWebUrl: "https://developers.kakao.com",
+            webUrl: "https://developers.kakao.com",
+          },
+        },
 
-  //       buttons: [
-  //         {
-  //           title: "웹으로 보기",
-  //           link: {
-  //             mobileWebUrl: "https://developers.kakao.com",
-  //             webUrl: "https://developers.kakao.com",
-  //           },
-  //         },
-  //         {
-  //           title: "앱으로 보기",
-  //           link: {
-  //             mobileWebUrl: "https://developers.kakao.com",
-  //             webUrl: "https://developers.kakao.com",
-  //           },
-  //         },
-  //       ],
-  //     });
-  //   }
-  // };
+        buttons: [
+          {
+            title: "웹으로 보기",
+            link: {
+              mobileWebUrl: "https://developers.kakao.com",
+              webUrl: "https://developers.kakao.com",
+            },
+          },
+          {
+            title: "앱으로 보기",
+            link: {
+              mobileWebUrl: "https://developers.kakao.com",
+              webUrl: "https://developers.kakao.com",
+            },
+          },
+        ],
+      });
+    }
+  };
 
   return (
     <Container>
@@ -55,7 +55,7 @@ const Card: FC<Coupon> = ({ title, couponNumber, image, lastDay }) => {
       </TopWrapper>
 
       <BottomWrapper>
-        <button>
+        <button onClick={kakaoButton}>
           <CacaoImg
             src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
             alt="카카오톡 공유 보내기 버튼"
