@@ -14,7 +14,7 @@ import cuoponRouter from "./routes/cuoponRouter";
 console.log("version 1");
 
 const app: Application = express();
-app.use(cors({ origin: ["http://localhost:3000"] }));
+
 const setCrossOriginOpenerPolicyHeader = (
   req: Request,
   res: Response,
@@ -28,11 +28,18 @@ const setCrossOriginOpenerPolicyHeader = (
 app.use(setCrossOriginOpenerPolicyHeader);
 
 if (process.env.NODE_ENV === "production") {
+  app.enable("trust proxy");
   app.use(morgan("combined"));
   app.use(hpp());
-  app.use(helmet());
+  app.use(helmet({ contentSecurityPolicy: false }));
 } else {
   app.use(morgan("dev"));
+  app.use(
+    cors({
+      origin: true,
+      credentials: true,
+    })
+  );
 }
 
 mongoose

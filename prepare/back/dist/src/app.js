@@ -15,7 +15,6 @@ dotenv_1.default.config();
 const cuoponRouter_1 = __importDefault(require("./routes/cuoponRouter"));
 console.log("version 1");
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)({ origin: ["http://localhost:3000"] }));
 const setCrossOriginOpenerPolicyHeader = (req, res, next) => {
     res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
     next();
@@ -23,12 +22,17 @@ const setCrossOriginOpenerPolicyHeader = (req, res, next) => {
 // Cross-Origin-Opener-Policy 헤더를 설정하는 미들웨어 함수를 등록합니다.
 app.use(setCrossOriginOpenerPolicyHeader);
 if (process.env.NODE_ENV === "production") {
+    app.enable("trust proxy");
     app.use((0, morgan_1.default)("combined"));
     app.use((0, hpp_1.default)());
-    app.use((0, helmet_1.default)());
+    app.use((0, helmet_1.default)({ contentSecurityPolicy: false }));
 }
 else {
     app.use((0, morgan_1.default)("dev"));
+    app.use((0, cors_1.default)({
+        origin: true,
+        credentials: true,
+    }));
 }
 mongoose_1.default
     .connect(process.env.MONGODB_URL)
