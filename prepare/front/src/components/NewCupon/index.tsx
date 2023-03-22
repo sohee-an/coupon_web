@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { backUrl } from "../../config";
 
 interface Inputs {
   title: string;
@@ -87,10 +88,7 @@ const NewCupon = () => {
         formData.append("lastDay", lastDay);
         formData.append("couponNumber", couponNumber);
         try {
-          const res = await axios.post(
-            `${process.env.REACT_APP_DB_HOST}api/cuopon`,
-            formData
-          );
+          const res = await axios.post(`${backUrl}api/cuopon`, formData);
           console.log("response", res);
           setTitle("");
           setCouponNumber("");
