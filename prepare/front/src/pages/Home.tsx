@@ -3,6 +3,7 @@ import Card from "../components/Card";
 import styled from "styled-components";
 import axios from "axios";
 import { Coupon } from "../types/couponType";
+import { backUrl } from "../config";
 
 const Home = () => {
   const [coupons, setCoupons] = useState<Coupon[]>([
@@ -17,9 +18,7 @@ const Home = () => {
     /**Coupon 정보 가져오기 */
     const getCoupon = async () => {
       try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_DB_HOST}api/cuopon`
-        );
+        const res = await axios.get(`${backUrl}api/cuopon`);
 
         setCoupons(res.data);
       } catch (err) {
