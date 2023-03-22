@@ -14,7 +14,7 @@ import cuoponRouter from "./routes/cuoponRouter";
 console.log("version 1");
 
 const app: Application = express();
-app.use(cors({ origin: ["http://localhost:8070/"] }));
+app.use(cors({ origin: ["http://localhost:3000"] }));
 const setCrossOriginOpenerPolicyHeader = (
   req: Request,
   res: Response,

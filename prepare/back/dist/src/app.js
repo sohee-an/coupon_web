@@ -15,7 +15,7 @@ dotenv_1.default.config();
 const cuoponRouter_1 = __importDefault(require("./routes/cuoponRouter"));
 console.log("version 1");
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)({ origin: ["http://localhost:8070/"] }));
+app.use((0, cors_1.default)({ origin: ["http://localhost:3000"] }));
 const setCrossOriginOpenerPolicyHeader = (req, res, next) => {
     res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
     next();
