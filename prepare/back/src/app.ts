@@ -15,10 +15,17 @@ console.log("version 1");
 
 const app: Application = express();
 app.use(cors({ origin: ["http://localhost:8070/"] }));
-app.use((req, res, next) => {
+const setCrossOriginOpenerPolicyHeader = (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
   res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
   next();
-});
+};
+
+// Cross-Origin-Opener-Policy 헤더를 설정하는 미들웨어 함수를 등록합니다.
+app.use(setCrossOriginOpenerPolicyHeader);
 
 if (process.env.NODE_ENV === "production") {
   app.use(morgan("combined"));

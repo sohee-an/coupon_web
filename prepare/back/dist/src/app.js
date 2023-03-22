@@ -16,10 +16,12 @@ const cuoponRouter_1 = __importDefault(require("./routes/cuoponRouter"));
 console.log("version 1");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({ origin: ["http://localhost:8070/"] }));
-app.use((req, res, next) => {
+const setCrossOriginOpenerPolicyHeader = (req, res, next) => {
     res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
     next();
-});
+};
+// Cross-Origin-Opener-Policy 헤더를 설정하는 미들웨어 함수를 등록합니다.
+app.use(setCrossOriginOpenerPolicyHeader);
 if (process.env.NODE_ENV === "production") {
     app.use((0, morgan_1.default)("combined"));
     app.use((0, hpp_1.default)());
