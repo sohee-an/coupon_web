@@ -15,11 +15,15 @@ console.log("version 1");
 
 const app: Application = express();
 app.use(cors({ origin: ["http://localhost:8070/"] }));
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+  next();
+});
 
 if (process.env.NODE_ENV === "production") {
   app.use(morgan("combined"));
-  //app.use(hpp());
-  // app.use(helmet());
+  app.use(hpp());
+  app.use(helmet());
 } else {
   app.use(morgan("dev"));
 }
