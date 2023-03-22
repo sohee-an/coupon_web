@@ -28,7 +28,7 @@ const setCrossOriginOpenerPolicyHeader = (
 app.use(setCrossOriginOpenerPolicyHeader);
 
 if (process.env.NODE_ENV === "production") {
-  app.enable("trust proxy");
+  //app.enable("trust proxy");
   app.use(morgan("combined"));
   app.use(hpp());
   app.use(helmet({ contentSecurityPolicy: false }));
@@ -56,7 +56,7 @@ app.get("/welcome", (req: Request, res: Response) => {
   res.send("welcome");
 });
 
-app.use("/api/cuopon", cuoponRouter);
+app.use("/api/cuopon", setCrossOriginOpenerPolicyHeader, cuoponRouter);
 
 app.get("/*", (req, res) => {
   res.set({
