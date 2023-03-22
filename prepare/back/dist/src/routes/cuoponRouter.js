@@ -54,8 +54,9 @@ cuoponRouter.post("/", upload.none(), (req, res, next) => __awaiter(void 0, void
             lastDay: req.body.lastDay,
             image: req.body.image,
         });
+        console.log(" before", newCoupon);
         const saveNewCoupon = yield newCoupon.save();
-        console.log(saveNewCoupon);
+        console.log("res", saveNewCoupon);
         res.status(200).json(saveNewCoupon);
     }
     catch (err) {

@@ -14,11 +14,7 @@ import cuoponRouter from "./routes/cuoponRouter";
 console.log("version 1");
 
 const app: Application = express();
-app.use(
-  cors({
-    origin: ["http://localhost:3000", "http://43.201.113.255"],
-  })
-);
+app.use(cors());
 
 if (process.env.NODE_ENV === "production") {
   app.use(morgan("combined"));
@@ -39,7 +35,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/welcome", (req: Request, res: Response) => {
-  res.send("한글 되니?");
+  res.send("welcome");
 });
 
 app.use("/api/cuopon", cuoponRouter);

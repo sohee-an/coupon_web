@@ -1,7 +1,6 @@
 import React, { useCallback, useState, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { imgURL } from "../../config/config";
 
 interface Inputs {
   title: string;
@@ -10,8 +9,6 @@ interface Inputs {
 }
 
 const NewCupon = () => {
-  // const backURL = "http://localhost:8070/api";
-
   const [inputs, setInputs] = useState<Inputs>({
     title: "",
     couponNumber: "",
@@ -60,7 +57,10 @@ const NewCupon = () => {
 
       const postInput = async () => {
         try {
-          const res = await axios.post(`api/cuopon/images`, imageFormData);
+          const res = await axios.post(
+            `${process.env.REACT_APP_DB_HOST}api/cuopon/images`,
+            imageFormData
+          );
           setImagePaths(res.data);
         } catch (err) {
           console.dir(err);
@@ -87,7 +87,10 @@ const NewCupon = () => {
         formData.append("lastDay", lastDay);
         formData.append("couponNumber", couponNumber);
         try {
-          const res = await axios.post(`api/cuopon`, formData);
+          const res = await axios.post(
+            `${process.env.REACT_APP_DB_HOST}api/cuopon`,
+            formData
+          );
           console.log("response", res);
           setTitle("");
           setCouponNumber("");
@@ -132,7 +135,11 @@ const NewCupon = () => {
           <div>
             {imagePaths.map((v, i) => (
               <div key={v} style={{ display: "inline-block" }}>
-                <img src={`${imgURL}${v}`} style={{ width: "200px" }} alt={v} />
+                <img
+                  src={`${process.env.REACT_APP_DB_HOST}${v}`}
+                  style={{ width: "200px" }}
+                  alt={v}
+                />
               </div>
             ))}
           </div>

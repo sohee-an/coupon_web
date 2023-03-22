@@ -15,9 +15,7 @@ dotenv_1.default.config();
 const cuoponRouter_1 = __importDefault(require("./routes/cuoponRouter"));
 console.log("version 1");
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)({
-    origin: ["http://localhost:3000", "http://43.201.113.255"],
-}));
+app.use((0, cors_1.default)());
 if (process.env.NODE_ENV === "production") {
     app.use((0, morgan_1.default)("combined"));
     app.use((0, hpp_1.default)());
@@ -35,7 +33,7 @@ app.use("/", express_1.default.static(path_1.default.join(__dirname, "../../uplo
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.get("/welcome", (req, res) => {
-    res.send("한글 되니?");
+    res.send("welcome");
 });
 app.use("/api/cuopon", cuoponRouter_1.default);
 app.get("/*", (req, res) => {

@@ -40,26 +40,23 @@ cuoponRouter.post(
 );
 
 /**모든 inputs을 등록 */
-cuoponRouter.post(
-  "/",
-  upload.none(),
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const newCoupon = new Coupon({
-        title: req.body.title,
-        couponNumber: req.body.couponNumber,
-        lastDay: req.body.lastDay,
-        image: req.body.image,
-      });
+cuoponRouter.post("/", upload.none(), async (req: Request, res: Response) => {
+  try {
+    const newCoupon = new Coupon({
+      title: req.body.title,
+      couponNumber: req.body.couponNumber,
+      lastDay: req.body.lastDay,
+      image: req.body.image,
+    });
 
-      const saveNewCoupon = await newCoupon.save();
-      console.log(saveNewCoupon);
-      res.status(200).json(saveNewCoupon);
-    } catch (err) {
-      res.status(500).json(err);
-    }
+    console.log(" before", newCoupon);
+    const saveNewCoupon = await newCoupon.save();
+    console.log("res", saveNewCoupon);
+    res.status(200).json(saveNewCoupon);
+  } catch (err) {
+    res.status(500).json(err);
   }
-);
+});
 
 /** all get coupon */
 cuoponRouter.get("/", async (req, res) => {

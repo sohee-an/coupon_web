@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState, FC } from "react";
 import styled from "styled-components";
-import { imgURL } from "../../config/config";
 
 import { Coupon } from "../../types/couponType";
 
@@ -49,7 +48,7 @@ const Card: FC<Coupon> = ({ title, couponNumber, image, lastDay }) => {
     <Container>
       <TopWrapper>
         <Title>{title}</Title>
-        <Image src={`/${image?.[0]}`}></Image>
+        <Image src={`${process.env.REACT_APP_DB_HOST}/${image?.[0]}`}></Image>
         <div>쿠폰번호:{couponNumber}</div>
         <div>{lastDay}</div>
       </TopWrapper>
